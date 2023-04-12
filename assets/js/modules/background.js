@@ -14,10 +14,7 @@ export class Background {
         this.ctx = ctx
     }
 
-    /**
-     * @param {CanvasRenderingContext2D} ctx
-     */
-    draw(ctx) {
+    draw() {
         this.ctx.drawImage(this.image, this.destinationX, this.destinationY)
 
         this.ctx.drawImage(
