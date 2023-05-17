@@ -1,41 +1,49 @@
 import { Background } from './background.js'
+import { BananaSkinPool } from './banana-skin/banana-skin-pool.js'
+import { InputHandler } from './input-handler.js'
 import { Player } from './player.js'
 
 export class Game {
-    score = 0
-    gameOver = false
-    lastTimeStamp = 0
+  score = 0
+  gameOver = false
 
-    constructor() {
-        /** @type {HTMLCanvasElement} */
-        this.canvas = document.querySelector('canvas')
-        this.canvas.width = 480
-        this.canvas.height = 360
+  constructor() {
+    /** @type {HTMLCanvasElement} */
+    this.canvas = document.querySelector('canvas')
+    this.canvas.width = 480
+    this.canvas.height = 360
 
-        this.ctx = this.canvas.getContext('2d')
+    this.ctx = this.canvas.getContext('2d')
 
-        this.background = new Background(this.ctx)
-        this.player = new Player(this.ctx)
+    this.inputHandler = new InputHandler()
 
-        this.animate(0)
-    }
+    this.background = new Background(this.ctx)
 
-    /**
-     * @param {number} timeStamp
-     * Nombre de millisecondes écoulées depuis le début du jeu
-     */
-    animate = (timeStamp) => {
-        const deltaTime = timeStamp - this.lastTimeStamp
-        this.lastTimeStamp = timeStamp
+    this.player = new Player(this)
 
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.bananaSkinPool = new BananaSkinPool(this)
 
-        this.background.draw()
-        this.background.update(deltaTime)
+    this.lastTimeStamp = 0
+    this.animate(0)
+  }
 
-        this.player.draw()
-        this.player.update(timeStamp)
+  /**
+   * @param {number} timeStamp Nombre de millisecondes écoulées depuis le début du jeu
+   */
+  animate = (timeStamp) => {
+    const deltaTime = timeStamp - this.lastTimeStamp
+    this.lastTimeStamp = timeStamp
 
-        window.requestAnimationFrame(this.animate)
-    }
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
+    this.background.draw()
+    this.background.update(deltaTime)
+
+    this.bananaSkinPool.render(timeStamp, deltaTime)
+
+    this.player.draw()
+    this.player.update(timeStamp)
+
+    window.requestAnimationFrame(this.animate)
+  }
 }

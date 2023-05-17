@@ -1,12 +1,12 @@
 body {
-	display: grid;
-	align-items: center;
-	min-height: 100vh;
+    display: grid;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fff;
 }
 
 canvas {
-	width: 60%;
-	aspect-ratio: 480/360;
-	border: solid;
-	margin: auto;
+    width: 60%;
+    aspect-ratio: 480/360;
+    margin: auto;
 }

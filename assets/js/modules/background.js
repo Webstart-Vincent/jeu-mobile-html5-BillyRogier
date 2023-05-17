@@ -2,9 +2,10 @@ export class Background {
     destinationX = 0
     destinationY = 0
     width = 930
-    speed = 60
+    speed = 100 // 30px/s
 
     /**
+     * Description
      * @param {CanvasRenderingContext2D} ctx
      */
     constructor(ctx) {
@@ -25,8 +26,8 @@ export class Background {
     }
 
     /**
-     * @param {number} deltaTime
-     * Laps de temps écoulé depuis le dernier update
+     * Description
+     * @param {number} deltaTime Laps de temps écoulé depuis le dernier update
      */
     update(deltaTime) {
         this.destinationX -= (deltaTime * this.speed) / 1000
