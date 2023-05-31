@@ -10,3 +10,14 @@ canvas {
     aspect-ratio: 480/360;
     margin: auto;
 }
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, min-content);
+    align-items: end;
+    gap: 20px;
+}
+
+.container > img {
+    width: 150px;
+}
